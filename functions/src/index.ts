@@ -26,6 +26,11 @@ import * as logger from "firebase-functions/logger";
 // this will be the maximum concurrent request count.
 setGlobalOptions({maxInstances: 10});
 
+/**
+ * Generates a random integer between 1 and 100 (inclusive).
+ *
+ * @return {number} A random integer between 1 and 100.
+ */
 function getRandomInt(): number {
   return Math.floor(Math.random() * 100) + 1;
 }
