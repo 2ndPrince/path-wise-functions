@@ -35,7 +35,10 @@ function getRandomInt(): number {
   return Math.floor(Math.random() * 100) + 1;
 }
 
-export const helloWorld = onRequest((request, response) => {
-  logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!" + " " + getRandomInt());
-});
+export const helloWorld = onRequest(
+  {
+    cors: ["https://path-wise-792e5.web.app", "http://localhost:3000"], // ✅ 이 형식만 허용됨
+  }, (request, response) => {
+    logger.info("Hello logs!", {structuredData: true});
+    response.send("Hello from Firebase!" + " " + getRandomInt());
+  });
