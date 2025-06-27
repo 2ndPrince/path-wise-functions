@@ -10,6 +10,7 @@
 import {setGlobalOptions} from "firebase-functions";
 import {onRequest} from "firebase-functions/https";
 import * as logger from "firebase-functions/logger";
+import {generateFromVertex} from "./vertex";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -42,3 +43,24 @@ export const helloWorld = onRequest(
     logger.info("Hello logs!", {structuredData: true});
     response.json({message: "Hello from Firebase!" + " " + getRandomInt()});
   });
+
+export const askVertexAI = onRequest(
+  {
+    cors: ["https://path-wise-792e5.web.app", "http://localhost:3000"],
+  },
+  async (req, res) => {
+    try {
+      const message = req.body.message;
+      if (!message || typeof message !== "string") {
+        res.status(400).json({error: "Missing or invalid message."});
+        return;
+      }
+
+      const result = await generateFromVertex(message);
+      res.status(200).json({response: result}); // ✅ return 안 함
+    } catch (err) {
+      res.status(500)
+        .json({error: "Failed to generate response from Vertex AI."});
+    }
+  }
+);
