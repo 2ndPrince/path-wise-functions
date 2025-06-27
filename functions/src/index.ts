@@ -51,14 +51,18 @@ export const askVertexAI = onRequest(
   async (req, res) => {
     try {
       const message = req.body.message;
+      logger.info("Received request", {message});
       if (!message || typeof message !== "string") {
+        logger.warn("Invalid or missing message in request");
         res.status(400).json({error: "Missing or invalid message."});
         return;
       }
 
       const result = await generateFromVertex(message);
+      logger.info("Generated response from Vertex AI", {response: result});
       res.status(200).json({response: result}); // ✅ return 안 함
     } catch (err) {
+      logger.error("Error generating response from Vertex AI", {error: err});
       res.status(500)
         .json({error: "Failed to generate response from Vertex AI."});
     }
