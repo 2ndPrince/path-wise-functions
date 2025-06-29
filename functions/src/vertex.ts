@@ -3,7 +3,7 @@ import {GoogleGenAI, HarmCategory, HarmBlockThreshold} from "@google/genai";
 
 const ai = new GoogleGenAI({
   vertexai: true,
-  project: "linen-fort-462501-m1",
+  project: "path-wise-792e5",
   location: "global",
 });
 
@@ -15,7 +15,7 @@ const tools = [
       vertexRagStore: {
         ragResources: [
           {
-            ragCorpus: "projects/linen-fort-462501-m1/locations/us-central1/ragCorpora/1152921504606846976",
+            ragCorpus: "projects/830896169062/locations/us-central1/ragCorpora/6917529027641081856",
           },
         ],
         similarityTopK: 20,
